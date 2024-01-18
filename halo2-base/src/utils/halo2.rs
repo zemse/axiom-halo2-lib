@@ -136,12 +136,13 @@ pub trait KeygenCircuitIntent<F: Field> {
     ) -> Self::Pinning;
 }
 
-use halo2_proofs_axiom::halo2curves::bn256::Bn256;
-use halo2_proofs_axiom::poly::kzg::commitment::ParamsKZG;
+use crate::halo2_proofs::halo2curves::bn256::Bn256;
+use crate::halo2_proofs::poly::kzg::commitment::ParamsKZG;
+
 pub use keygen::ProvingKeyGenerator;
 
 mod keygen {
-    use halo2_proofs_axiom::poly::commitment::Params;
+    use crate::halo2_proofs::poly::commitment::Params;
 
     use crate::halo2_proofs::{
         halo2curves::bn256::{Bn256, Fr, G1Affine},
@@ -175,7 +176,7 @@ mod keygen {
             let pk = plonk::keygen_pk2(kzg_params, &circuit, false).unwrap();
             #[cfg(not(feature = "halo2-axiom"))]
             let pk = {
-                let vk = plonk::keygen_vk_custom(kzg_params, &circuit, false).unwrap();
+                let vk = plonk::keygen_vk(kzg_params, &circuit).unwrap();
                 plonk::keygen_pk(kzg_params, vk, &circuit).unwrap()
             };
             let pinning = self.get_pinning_after_keygen(kzg_params, &circuit);
