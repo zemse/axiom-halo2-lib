@@ -11,7 +11,7 @@ use crate::{
     },
     AssignedValue, ContextCell,
 };
-use halo2_proofs_axiom::plonk::FirstPhase;
+use halo2_proofs::plonk::FirstPhase;
 use rand::{rngs::StdRng, Rng, SeedableRng};
 use test_log::test;
 

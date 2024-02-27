@@ -11,7 +11,7 @@ rust-version = "1.73.0"
 
 [dependencies]
 array-init = "2.0.0"
-ethers-core = "2.0.8"
+ethers-core = "=2.0.7"
 rand = "0.8"
 itertools = "0.11"
 lazy_static = "1.4"
@@ -23,12 +23,14 @@ rayon = "1.8"
 sha3 = "0.10.8"
 # always included but without features to use Native poseidon and get CircuitExt trait
 # snark-verifier-sdk = { version = "=0.1.7", default-features = false }
-snark-verifier-sdk = { version = "=0.1.7", git = "https://github.com/axiom-crypto/snark-verifier.git", tag = "v0.1.7-git", default-features = false }
+# snark-verifier-sdk = { version = "=0.1.7", git = "https://github.com/axiom-crypto/snark-verifier.git", tag = "v0.1.7-git", default-features = false }
+# snark-verifier-sdk = { path = "../../../axiom-snark-verifier/snark-verifier-sdk", default-features = false }
+snark-verifier-sdk = { git = "https://github.com/zemse/snark-verifier.git", branch = "scroll-static-call", default-features = false }
 getset = "0.1.2"
 type-map = "0.5.0"
 
 [dev-dependencies]
-ethers-signers = "2.0.8"
+ethers-signers = "=2.0.7"
 hex = "0.4.3"
 itertools = "0.11"
 pretty_assertions = "1.0.0"
@@ -39,10 +41,13 @@ test-case = "3.1.0"
 sha2 = "0.10.7"
 
 [features]
-default = ["halo2-axiom", "display"]
-display = ["snark-verifier-sdk/display"]
-halo2-pse = ["halo2-base/halo2-pse", "snark-verifier-sdk/halo2-pse"]
-halo2-axiom = ["halo2-base/halo2-axiom", "snark-verifier-sdk/halo2-axiom"]
+default = ["halo2-pse", "display"]
+# display = ["snark-verifier-sdk/display"]
+display = []
+# halo2-pse = ["halo2-base/halo2-pse", "snark-verifier-sdk/halo2-pse"]
+# halo2-axiom = ["halo2-base/halo2-axiom", "snark-verifier-sdk/halo2-axiom"]
+halo2-pse = ["halo2-base/halo2-pse"]
+halo2-axiom = ["halo2-base/halo2-axiom"]
 jemallocator = ["halo2-base/jemallocator"]
 mimalloc = ["halo2-base/mimalloc"]
 asm = ["halo2-base/asm"]
